@@ -35,13 +35,16 @@ void calc_task(void *vargs)
 void test_request(void)
 {
     TaskHandle_t coop_thread;
+    // Init binary semaphores
     SemaphoreHandle_t request = xSemaphoreCreateCounting(1, 0);
     SemaphoreHandle_t response = xSemaphoreCreateCounting(1, 0);
 
     struct signal_data data = {};
     struct task_args args = {request, response, &data};
+    // Begin handler thread
     xTaskCreate(calc_task, "test_request", TEST_TASK_STACK_SIZE,
                 (void *)&args, TEST_TASK_PRIORITY, &coop_thread);
+    // 
     for (int counter = 46; counter < 55; counter++) {
         data.input = counter;
         BaseType_t result = signal_request_calculate(request, response, &data);
