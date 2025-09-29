@@ -1,9 +1,9 @@
 # This is the main binary. List your C files here.
-set(execName "threads")
+set(execName "lab4")
 
 add_executable(${execName}
-    threads.c
-    func.c
+    signaling.c
+    main.c
     )
 
 pico_set_program_name(${execName} "test")
