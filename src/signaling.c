@@ -19,8 +19,8 @@ BaseType_t signal_request_calculate(SemaphoreHandle_t request, SemaphoreHandle_t
 
     // Wait for response
     if (xSemaphoreTake(response, 1000) == 1)
-        return pdFAIL;
-    else 
         return pdTRUE;
+    else 
+        return pdFAIL;
 
 }
